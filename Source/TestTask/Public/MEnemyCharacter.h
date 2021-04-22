@@ -19,9 +19,15 @@ class TESTTASK_API AMEnemyCharacter : public AMCharacterBase
 	UFUNCTION()
     void OnGameplayEffectApplied(UAbilitySystemComponent* Source, const FGameplayEffectSpec& Spec, FActiveGameplayEffectHandle Handle);
 	virtual void BeginPlay() override;
+
+	virtual void HealthChanged(const FOnAttributeChangeData& Data);
 	public:
+	UFUNCTION(BlueprintNativeEvent)
+	void Death();
+
+	virtual void Death_Implementation();
 
 	AMEnemyCharacter();
-		UPROPERTY()
-		UMStatsSet* StatsSet;
+	UPROPERTY()
+	UMStatsSet* StatsSet;
 };

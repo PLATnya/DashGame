@@ -5,7 +5,6 @@
 
 
 #include "GameFramework/CharacterMovementComponent.h"
-#include "GameFramework/PawnMovementComponent.h"
 
 void AMEnemyCharacter::OnGameplayEffectApplied(UAbilitySystemComponent* Source, const FGameplayEffectSpec& Spec,
                                                FActiveGameplayEffectHandle Handle)
@@ -27,7 +26,6 @@ void AMEnemyCharacter::OnGameplayEffectApplied(UAbilitySystemComponent* Source, 
 		constantForce->FinishVelocityParams.Mode = ERootMotionFinishVelocityMode::MaintainLastRootMotionVelocity;
 		
 		GetCharacterMovement()->ApplyRootMotionSource(constantForce);
-		
 	}
 	
 }
@@ -36,6 +34,16 @@ void AMEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	AbilitySystemComponent->OnGameplayEffectAppliedDelegateToSelf.AddUObject(this, &AMEnemyCharacter::OnGameplayEffectApplied);
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(StatsSet->GetHealthAttribute()).AddUObject(this, &AMEnemyCharacter::HealthChanged);
+}
+
+void AMEnemyCharacter::HealthChanged(const FOnAttributeChangeData& Data)
+{
+	if (Data.NewValue <= 0) Death();
+}
+
+void AMEnemyCharacter::Death_Implementation()
+{
 }
 
 AMEnemyCharacter::AMEnemyCharacter()
