@@ -15,6 +15,10 @@ class TESTTASK_API AMEnemyCharacter : public AMCharacterBase
 {
 	GENERATED_BODY()
 
+	protected:
+	UFUNCTION()
+    void OnGameplayEffectApplied(UAbilitySystemComponent* Source, const FGameplayEffectSpec& Spec, FActiveGameplayEffectHandle Handle);
+	virtual void BeginPlay() override;
 	public:
 
 	AMEnemyCharacter();
