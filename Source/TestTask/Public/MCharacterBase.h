@@ -4,26 +4,35 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "AbilitySystemInterface.h"
+#include "AbilitySystemComponent.h"
 #include "MCharacterBase.generated.h"
 
 UCLASS()
-class TESTTASK_API AMCharacterBase : public ACharacter
+class TESTTASK_API AMCharacterBase : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
+	
 	AMCharacterBase();
 
 protected:
-	// Called when the game starts or when spawned
+	UPROPERTY(BlueprintReadOnly)
+	UAbilitySystemComponent* AbilitySystemComponent;
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
+	TSubclassOf<UGameplayAbility> DamagedDashAbility;
+	
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
+	
+public:
+	
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	
+	virtual void PossessedBy(AController * NewController) override;
 	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	
+	
 };
