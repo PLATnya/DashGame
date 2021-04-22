@@ -18,5 +18,6 @@ class TESTTASK_API AMEnemyCharacter : public AMCharacterBase
 	public:
 
 	AMEnemyCharacter();
+		UPROPERTY()
 		UMStatsSet* StatsSet;
 };

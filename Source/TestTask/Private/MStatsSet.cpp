@@ -5,5 +5,5 @@
 
 UMStatsSet::UMStatsSet()
 {
-	Health = 100.0f;
+	InitHealth(100.0);
 }
