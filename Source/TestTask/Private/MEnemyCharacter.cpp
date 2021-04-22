@@ -3,3 +3,7 @@
 
 #include "MEnemyCharacter.h"
 
+AMEnemyCharacter::AMEnemyCharacter()
+{
+	StatsSet = CreateDefaultSubobject<UMStatsSet>("Stats");
+}
