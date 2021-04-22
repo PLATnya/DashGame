@@ -18,17 +18,21 @@ public:
 	AMCharacterBase();
 
 protected:
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	UAbilitySystemComponent* AbilitySystemComponent;
-
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
+	TSubclassOf<UGameplayAbility> DamagedDashAbility;
+	
 	virtual void BeginPlay() override;
 
+	
 public:
+	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	
-	
+	virtual void PossessedBy(AController * NewController) override;
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	
 	
 };
