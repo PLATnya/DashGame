@@ -9,6 +9,7 @@ AMCharacterBase::AMCharacterBase()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>("ASC");
 }
 
 // Called when the game starts or when spawned
@@ -16,6 +17,22 @@ void AMCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+void AMCharacterBase::PossessedBy(AController * NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if (AbilitySystemComponent)
+	{
+		AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	}
+
+	
+}
+UAbilitySystemComponent* AMCharacterBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
 }
 
 // Called every frame
