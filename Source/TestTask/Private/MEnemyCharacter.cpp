@@ -11,17 +11,20 @@ void AMEnemyCharacter::OnGameplayEffectApplied(UAbilitySystemComponent* Source, 
 {
 	FGameplayTagContainer EffectTagsContainer;
 	Spec.GetAllAssetTags(EffectTagsContainer);
-	
 	const bool IsDamage = EffectTagsContainer.HasTag(FGameplayTag::RequestGameplayTag("Effect.Damage"));
 	if(IsDamage)
 	{
-		const float Force = Spec.Modifiers[0].GetEvaluatedMagnitude();
-		AActor* instigator = Spec.GetEffectContext().GetInstigator();		
 		
-		const FVector direction = (GetActorLocation() -instigator->GetActorLocation()) + instigator->GetActorForwardVector() + FVector::UpVector*5;
+		const float Force = Spec.Modifiers[0].GetEvaluatedMagnitude();
+		AActor* instigator = Spec.GetEffectContext().GetInstigator();
+		
+		FVector direction = (GetActorLocation() -instigator->GetActorLocation()) + instigator->GetVelocity() ;
 		TSharedPtr<FRootMotionSource_ConstantForce> constantForce(new FRootMotionSource_ConstantForce());
 		constantForce->AccumulateMode = ERootMotionAccumulateMode::Additive;
-		constantForce->Force = -direction * Force;
+		direction = -direction * Force;
+		direction.Normalize();
+		direction*=5000;
+		constantForce->Force = direction;
 		constantForce->Duration = 0.1f;
 		constantForce->FinishVelocityParams.Mode = ERootMotionFinishVelocityMode::MaintainLastRootMotionVelocity;
 		GetCharacterMovement()->MovementMode = EMovementMode::MOVE_Falling;
