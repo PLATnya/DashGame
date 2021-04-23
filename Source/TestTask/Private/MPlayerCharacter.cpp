@@ -5,8 +5,3 @@
 
 
 
-void AMPlayerCharacter::BeginPlay()
-{
-	Super::BeginPlay();
-	AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(DamagedDashAbility,0,0,this));
-}
