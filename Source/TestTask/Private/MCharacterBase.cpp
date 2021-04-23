@@ -16,7 +16,7 @@ AMCharacterBase::AMCharacterBase()
 void AMCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
-	AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(DamagedDashAbility,0,0,this));
+	
 }
 
 void AMCharacterBase::PossessedBy(AController * NewController)

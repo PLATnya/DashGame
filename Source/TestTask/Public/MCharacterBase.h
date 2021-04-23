@@ -20,8 +20,7 @@ public:
 protected:
 	UPROPERTY(BlueprintReadOnly)
 	UAbilitySystemComponent* AbilitySystemComponent;
-	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
-	TSubclassOf<UGameplayAbility> DamagedDashAbility;
+	
 	
 	virtual void BeginPlay() override;
 
