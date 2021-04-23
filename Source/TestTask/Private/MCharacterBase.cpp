@@ -16,7 +16,11 @@ AMCharacterBase::AMCharacterBase()
 void AMCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	for(auto Ability: Abilities)
+	{
+		AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(Ability,1,INDEX_NONE,this));
+	}
 }
 
 void AMCharacterBase::PossessedBy(AController * NewController)

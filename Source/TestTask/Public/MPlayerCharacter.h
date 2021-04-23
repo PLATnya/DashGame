@@ -13,8 +13,4 @@ UCLASS()
 class TESTTASK_API AMPlayerCharacter : public AMCharacterBase
 {
 	GENERATED_BODY()
-	protected:
-	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
-	TSubclassOf<UGameplayAbility> DamagedDashAbility;
-	virtual void BeginPlay() override;
 };
