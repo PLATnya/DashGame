@@ -24,6 +24,9 @@ protected:
 	
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
+	TArray<TSubclassOf<UGameplayAbility>> Abilities;
+
 	
 public:
 	
