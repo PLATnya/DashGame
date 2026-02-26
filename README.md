@@ -1,5 +1,4 @@
 # TestTask
-Full Project https://app.mediafire.com/sumhdvhom1fsy
 Developed with Unreal Engine 4
 _____
 ## Dash ability implementation by Unreal Engine Gameplay ability system
